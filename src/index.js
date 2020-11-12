@@ -9,6 +9,9 @@ export function useCompleteInput(input){
         setValue(e.target.value);
     }
     const place = 'Enter ' + input +'...'
+    const reset = () =>{
+        setValue('')
+    }
     const comp = () =>{
         return(
         <div className ='form-input'>
@@ -18,7 +21,7 @@ export function useCompleteInput(input){
             </label>
         </div>
     )}
-    return {value: value, comp: comp()}
+    return {value: value, comp: comp(),reset: reset}
 }
 
 export function useBareInput(input, initialValue){

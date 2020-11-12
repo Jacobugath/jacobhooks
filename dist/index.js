@@ -76,6 +76,10 @@ function useCompleteInput(input) {
 
   var place = 'Enter ' + input + '...';
 
+  var reset = function reset() {
+    setValue('');
+  };
+
   var comp = function comp() {
     return /*#__PURE__*/React__default.createElement("div", {
       className: "form-input"
@@ -89,7 +93,8 @@ function useCompleteInput(input) {
 
   return {
     value: value,
-    comp: comp()
+    comp: comp(),
+    reset: reset
   };
 }
 function useBareInput(input, initialValue) {
