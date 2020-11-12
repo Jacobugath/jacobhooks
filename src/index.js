@@ -2,14 +2,14 @@ import React from 'react';
 
 import {useState} from 'react';
 
-export default function useInput(input){
+export function useCompleteInput(input){
     const [value, setValue] = useState('');
     const update = (e) =>{
         e.preventDefault();
         setValue(e.target.value);
     }
     const place = 'Enter ' + input +'...'
-    const con = () =>{
+    const comp = () =>{
         return(
         <div className ='form-input'>
             <label>
@@ -18,5 +18,20 @@ export default function useInput(input){
             </label>
         </div>
     )}
-    return {value: value, comp: con()}
+    return {value: value, comp: comp()}
+}
+
+export function useBareInput(input, initialValue){
+    const [value, setValue] = useState(initialValue);
+    const update = (e) =>{
+        e.preventDefault();
+        setValue(e.target.value);
+    }
+    const place = 'Enter ' + input +'...'
+    const comp = () => {
+    return(
+                <input type='text' value={value} onChange={update} placeholder = {place}/>
+    )
+    }
+    return {value: value, comp: comp()}
 }

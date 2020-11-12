@@ -56,7 +56,7 @@ function _nonIterableRest() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
-function useInput(input) {
+function useCompleteInput(input) {
   var _useState = useState(''),
       _useState2 = _slicedToArray(_useState, 2),
       value = _useState2[0],
@@ -69,7 +69,7 @@ function useInput(input) {
 
   var place = 'Enter ' + input + '...';
 
-  var con = function con() {
+  var comp = function comp() {
     return /*#__PURE__*/React.createElement("div", {
       className: "form-input"
     }, /*#__PURE__*/React.createElement("label", null, input, ":", /*#__PURE__*/React.createElement("input", {
@@ -82,9 +82,36 @@ function useInput(input) {
 
   return {
     value: value,
-    comp: con()
+    comp: comp()
+  };
+}
+function useBareInput(input, initialValue) {
+  var _useState3 = useState(initialValue),
+      _useState4 = _slicedToArray(_useState3, 2),
+      value = _useState4[0],
+      setValue = _useState4[1];
+
+  var update = function update(e) {
+    e.preventDefault();
+    setValue(e.target.value);
+  };
+
+  var place = 'Enter ' + input + '...';
+
+  var comp = function comp() {
+    return /*#__PURE__*/React.createElement("input", {
+      type: "text",
+      value: value,
+      onChange: update,
+      placeholder: place
+    });
+  };
+
+  return {
+    value: value,
+    comp: comp()
   };
 }
 
-export default useInput;
+export { useBareInput, useCompleteInput };
 //# sourceMappingURL=index.es.js.map

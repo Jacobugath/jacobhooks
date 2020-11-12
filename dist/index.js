@@ -1,5 +1,7 @@
 'use strict';
 
+Object.defineProperty(exports, '__esModule', { value: true });
+
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var React = require('react');
@@ -61,7 +63,7 @@ function _nonIterableRest() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
-function useInput(input) {
+function useCompleteInput(input) {
   var _useState = React.useState(''),
       _useState2 = _slicedToArray(_useState, 2),
       value = _useState2[0],
@@ -74,7 +76,7 @@ function useInput(input) {
 
   var place = 'Enter ' + input + '...';
 
-  var con = function con() {
+  var comp = function comp() {
     return /*#__PURE__*/React__default.createElement("div", {
       className: "form-input"
     }, /*#__PURE__*/React__default.createElement("label", null, input, ":", /*#__PURE__*/React__default.createElement("input", {
@@ -87,9 +89,37 @@ function useInput(input) {
 
   return {
     value: value,
-    comp: con()
+    comp: comp()
+  };
+}
+function useBareInput(input, initialValue) {
+  var _useState3 = React.useState(initialValue),
+      _useState4 = _slicedToArray(_useState3, 2),
+      value = _useState4[0],
+      setValue = _useState4[1];
+
+  var update = function update(e) {
+    e.preventDefault();
+    setValue(e.target.value);
+  };
+
+  var place = 'Enter ' + input + '...';
+
+  var comp = function comp() {
+    return /*#__PURE__*/React__default.createElement("input", {
+      type: "text",
+      value: value,
+      onChange: update,
+      placeholder: place
+    });
+  };
+
+  return {
+    value: value,
+    comp: comp()
   };
 }
 
-module.exports = useInput;
+exports.useBareInput = useBareInput;
+exports.useCompleteInput = useCompleteInput;
 //# sourceMappingURL=index.js.map
